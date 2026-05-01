@@ -390,7 +390,9 @@ section {
   transform: translateY(-2px);
 }
 .social-link svg { width: 18px; height: 18px; }
-
+.nav-links a {
+  backdrop-filter: blur(6px);
+}
 /* Hero scroll */
 .hero-scroll {
   position: absolute;
@@ -422,7 +424,17 @@ section {
   from { opacity: 0; transform: translate(-50%, 20px); }
   to { opacity: 1; transform: translate(-50%, 0); }
 }
+/*== resume ==*/
+.nav-resume {
+  border: 1px solid var(--border2);
+  background: var(--surface);
+  color: var(--text);
+}
 
+.nav-resume:hover {
+  background: var(--surface2);
+  color: var(--accent);
+}
 /* ===== ABOUT ===== */
 #about { background: var(--bg2); }
 .about-grid {
@@ -1071,7 +1083,7 @@ footer {
         <li><a href="#projects">Projects</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li><a href="resume.pdf" class="btn btn-primary" style="padding:8px 20px;font-size:0.8rem;">Resume ↓</a></li>
+        <li><a href="resume.pdf" download class="nav-resume">Resume ↓</a></li>
       </ul>
       <div class="hamburger" id="hamburger" role="button" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -1156,7 +1168,7 @@ footer {
 
   <div class="hero-scroll">
     <div class="scroll-line"></div>
-    <span>SCROLL</span>
+    <span>SCROLL </span>
   </div>
 </section>
 
@@ -1376,10 +1388,40 @@ footer {
           </a>
         </div>
       </div>
+      <!-- Project 4 -->
+<div class="project-card reveal">
+  <div class="project-num">02 / AI + ML System</div>
+  <h3 class="project-title">AI Career Recommendation System</h3>
+  <p class="project-desc">
+    Built an AI-powered career guidance platform using Machine Learning and NLP techniques. The system analyzes user skills, predicts suitable tech career paths using a Random Forest model, performs resume analysis, detects skill gaps, and generates a personalized learning roadmap for career growth.
+  </p>
 
+  <div class="project-tech">
+    <span class="tech-badge">Python</span>
+    <span class="tech-badge">Flask</span>
+    <span class="tech-badge">Machine Learning</span>
+    <span class="tech-badge">NLP</span>
+    <span class="tech-badge">Scikit-learn</span>
+  </div>
+
+  <div class="project-links">
+    <!-- GitHub link -->
+    <a href="https://github.com/bajpai22/Portfolio" target="_blank" class="btn btn-ghost">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/>
+      </svg>
+      GitHub
+    </a>
+
+    <!-- Live Demo -->
+    <a href="https://career-ai-project-tata.onrender.com/" class="btn btn-ghost">
+      Live Demo
+    </a>
+  </div>
+</div>
       <!-- Project 2 -->
       <div class="project-card reveal">
-        <div class="project-num">02 / Automation + APIs</div>
+        <div class="project-num">03 / Automation + APIs</div>
         <h3 class="project-title">Personal Jarvis Assistant</h3>
         <p class="project-desc">
           Engineered a fully functional AI voice assistant inspired by Iron Man's Jarvis. The assistant listens to voice commands, fetches live data through third-party APIs, automates repetitive tasks, and provides intelligent responses — all in real time.
@@ -1404,7 +1446,7 @@ footer {
 
       <!-- Project 3 -->
       <div class="project-card reveal">
-        <div class="project-num">03 / Game Dev + UI</div>
+        <div class="project-num">04 / Game Dev + UI</div>
         <h3 class="project-title">Clash Memory Game</h3>
         <p class="project-desc">
           Developed an interactive memory card game featuring smooth CSS animations, real-time score tracking, visual effects, and responsive UI design. The game challenges players to match pairs while keeping track of moves and best scores.
@@ -1691,6 +1733,71 @@ setTimeout(() => {
   heroReveal.style.opacity = '1';
   heroReveal.style.transform = 'translateY(0)';
 }, 200);
+</script>
+<script>
+window.addEventListener("scroll", function () {
+  const nav = document.getElementById("navbar");
+  nav.classList.toggle("scrolled", window.scrollY > 50);
+});
+</script>
+<script>
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll(".nav-links a");
+
+window.addEventListener("scroll", () => {
+  let current = "";
+
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 100;
+    if (scrollY >= sectionTop) {
+      current = section.getAttribute("id");
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove("active");
+    if (link.getAttribute("href") === "#" + current) {
+      link.classList.add("active");
+    }
+  });
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const nav = document.getElementById("navbar");
+  const sections = document.querySelectorAll("section");
+  const navLinks = document.querySelectorAll(".nav-links a");
+
+  // Navbar scroll effect
+  window.addEventListener("scroll", function () {
+    nav.classList.toggle("scrolled", window.scrollY > 50);
+  });
+
+  // Active link highlight
+  window.addEventListener("scroll", () => {
+    let current = "";
+
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 120;
+      if (window.scrollY >= sectionTop) {
+        current = section.getAttribute("id");
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove("active");
+
+      const href = link.getAttribute("href");
+
+      if (href && href.startsWith("#") && href === "#" + current) {
+        link.classList.add("active");
+      }
+    });
+
+  });
+
+});
 </script>
 </body>
 </html>
